@@ -7,6 +7,8 @@ import tests.BaseTest;
 
 
 public class SearchTest extends BaseTest {
+
+    //Тестовый метод, проверяющий результаты поиска
     @Test(dataProvider = "dataProvider")
     public void openGoogle(String text) throws InterruptedException {
         WebElement searchField = driver.findElement(By.name("q"));

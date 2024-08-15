@@ -12,6 +12,7 @@ import java.io.File;
 public class BaseTest {
     protected WebDriver driver;
 
+    //Запускаем поисковик гугл в браузере
     @BeforeClass
     public void setUp() {
         File file = new File("src/test/resources/chromedriver.exe");
@@ -20,16 +21,19 @@ public class BaseTest {
         driver.get("https://www.google.com/");
     }
 
+    //Закрываем браузер
     @AfterClass
     public void tearDown(){
         driver.quit();
     }
 
+    // Возвращаемся назад после выполения тестовго метода
     @AfterMethod
     public void goBack(){
         driver.navigate().back();
     }
 
+    //Задаём поисковые запросы в виде параметров
     @DataProvider(name = "dataProvider")
     public Object[][] dataProviderMethod(){
         return new Object[][]{{"Libertex"},{"Forex Club"}};
