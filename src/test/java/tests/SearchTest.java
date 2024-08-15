@@ -3,25 +3,24 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import tests.BaseTest;
 
 import java.io.File;
 
-public class SearchTest {
-
-    @Test
-    public void openGoogle() throws InterruptedException {
-        File file = new File("src/test/resources/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com/");
+public class SearchTest extends BaseTest {
+    @Test(dataProvider = "dataProvider")
+    public void openGoogle(String text) throws InterruptedException {
         WebElement searchField = driver.findElement(By.name("q"));
         searchField.click();
-        searchField.sendKeys("libertex");
+        searchField.sendKeys(text);
         searchField.sendKeys(Keys.RETURN);
         Thread.sleep(3000);
         WebElement resultRow = driver.findElement(By.xpath("(//span[text()='Libertex'])[1]"));
-        System.out.println(resultRow.getText());
-        driver.quit();
+        Assert.assertEquals(resultRow.getText(), "Libertex");
     }
 }
