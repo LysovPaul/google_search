@@ -1,36 +1,34 @@
 package tests;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.codeborne.selenide.Configuration;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
-
-import java.io.File;
+import static com.codeborne.selenide.Selenide.*;
 
 public class BaseTest {
-    protected WebDriver driver;
 
     //Запускаем поисковик гугл в браузере
     @BeforeClass
     public void setUp() {
-        File file = new File("src/test/resources/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-        driver = new ChromeDriver();
-        driver.get("https://www.google.com/");
+        Configuration.browser = "chrome";
+        Configuration.baseUrl = "https://www.google.com";
+        Configuration.startMaximized = true;
+        Configuration.timeout = 10000;
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        open("https://www.google.com/");
     }
 
     //Закрываем браузер
     @AfterClass
-    public void tearDown(){
-        driver.quit();
+    public void tearDown() {
+        closeWebDriver();
     }
 
     // Возвращаемся назад после выполения тестовго метода
     @AfterMethod
     public void goBack(){
-        driver.navigate().back();
+        back();
     }
 
     //Задаём поисковые запросы в виде параметров
