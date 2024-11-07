@@ -19,7 +19,6 @@ public class GoogleSearchTest {
         Properties properties = new Properties();
         try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
             properties.load(fis);
-            // Чтение значений из файла конфигурации и настройка Selenide
             Configuration.browser = properties.getProperty("browser");
             Configuration.baseUrl = properties.getProperty("baseUrl");
             Configuration.browserSize = properties.getProperty("browserSize", "1920x1080");
