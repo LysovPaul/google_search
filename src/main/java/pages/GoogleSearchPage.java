@@ -8,13 +8,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class GoogleSearchPage {
-    private final SelenideElement searchField = $(By.name("q"));
 
-    public final void searchMethod(String text) {
-        searchField.setValue(text).pressEnter();
+    public GoogleSearchPage searchMethod(String text) {
+        $(By.name("q")).setValue(text).pressEnter();
+        return this;
     }
-
-    public void verifyResultContains(String expectedText) {
-        $x("(//span[text()='Libertex'])[1]").shouldHave(Condition.text(expectedText));
+    public GoogleSearchPage verifyResultContains(String expectedText) {
+        $(By.xpath("//span[contains(text(), '" + expectedText + "')]"))
+                .shouldHave(Condition.text(expectedText));
+        return this;
     }
 }
