@@ -19,8 +19,7 @@ public class BaseTest {
             Configuration.browser = properties.getProperty("browser", "chrome");
             Configuration.baseUrl = properties.getProperty("baseUrl", "https://www.google.com");
             Configuration.browserSize = properties.getProperty("browserSize", "1920x1080");
-            Configuration.timeout = Long.parseLong(properties.getProperty("timeout","10000"));
-            System.setProperty("webdriver.chrome.driver", properties.getProperty("chromeDriverPath"));
+            Configuration.timeout = Long.parseLong(properties.getProperty("timeout", "10000"));
         } catch (IOException e) {
             throw new RuntimeException("Configuration error", e);
         }
