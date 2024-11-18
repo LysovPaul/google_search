@@ -1,12 +1,7 @@
-package org.example;
+package org.example.tests;
 
-import com.codeborne.selenide.Configuration;
 import org.testng.annotations.*;
-import pages.GoogleSearchPage;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+import org.example.pages.GoogleSearchPage;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -16,7 +11,7 @@ public class GoogleSearchTest extends BaseTest {
 
     @Test(dataProvider = "dataProvider")
     public void openGoogle(String text) {
-        open(Configuration.baseUrl);
+        open("/");
         googleSearchPage
                 .searchMethod(text)
                 .verifyResultContains("Libertex");

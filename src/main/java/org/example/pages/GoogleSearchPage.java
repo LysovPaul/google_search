@@ -1,11 +1,9 @@
-package pages;
+package org.example.pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class GoogleSearchPage {
 
@@ -15,7 +13,7 @@ public class GoogleSearchPage {
     }
     public GoogleSearchPage verifyResultContains(String expectedText) {
         $(By.xpath("//span[contains(text(), '" + expectedText + "')]"))
-                .shouldHave(Condition.text(expectedText));
+                .shouldBe(Condition.visible);
         return this;
     }
 }
